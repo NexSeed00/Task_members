@@ -1,7 +1,7 @@
 <?php
 
 //DB設定
-$host = "localhost.com";
+$host = "localhost";
 // $host = "ccd_php.localhost.com";
 
 // ↓を変更したら他でも使える

@@ -2,7 +2,7 @@
 
 //DBに接続
 $host = "localhost";
-$dbname = "todo";
+$dbname = "pure_php";
 $charset = "utf8mb4";
 $user = 'root';
 $password = '';
