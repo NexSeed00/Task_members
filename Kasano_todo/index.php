@@ -1,6 +1,15 @@
 <?php
+  require_once('dbconnect.php');
 
+
+  // prepare()
+  // execute()
+  $stmt = $dbh->prepare('SELECT * FROM tasks');
+  $stmt->execute();
+
+  $tasks = $stmt->fetchAll();
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,7 +32,7 @@
                             <a class="nav-link text-light" href="create.php">Create</a>
                         </li>
                         <li class="nav-item">
-                            <form class="form-inline">
+                            <form class="form-inline" action="" method="post">
                                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                                 <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
                             </form>
@@ -36,22 +45,24 @@
 
         <div class="row p-3">
             <div class="col-sm-6 col-md-4 col-lg-3 py-3 py-3">
+                <?php foreach ($tasks as $task) :?>
                 <div class="card">
                     <img src="https://picsum.photos/200" class="card-img-top" alt="...">
                     <div class="card-body">
-                        <h5 class="card-title">ここにタイトル</h5>
+                        <h5 class="card-title"><?php echo $task['title'];?></h5>
                         <p class="card-text">
-                            ここに詳細
+                            <?php echo $task['contents'];?>
                         </p>
                         <div class="text-right d-flex justify-content-end">
-                            <a href="edit.php" class="btn text-success">EDIT</a>
+                            <a href="edit.php?id=<?php echo $task['id']; ?>" class="btn text-success">EDIT</a>
                             <form action="delete.php" method="post">
-                                <input type="hidden" name="id">
+                                <input type="hidden" name="id" value="<?php echo $task['id']; ?>">
                                 <button type="submit" class="btn text-danger">DELETE</button>
                             </form>
                         </div>
                     </div>
                 </div>
+                <?php endforeach; ?>
             </div>
         </div>
     </div>
